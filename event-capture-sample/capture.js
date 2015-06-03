@@ -1,4 +1,4 @@
 dsEventBroker.capture('click');
-deEventBroker.when('click').then(function (e) {
+dsEventBroker.when('click').then(function (e) {
 	console.log(e);
 });
