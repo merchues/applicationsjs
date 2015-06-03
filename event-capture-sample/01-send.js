@@ -9,3 +9,7 @@ function sendClickEvent (event) {
       customData: event.customData
     });
 }
+
+
+dsEventBroker.capture('click');
+dsEventBroker.when('click').then(sendClickEvent);
