@@ -1,5 +1,5 @@
 function sendClickEvent (event) {
-	dsEventBroker.analytics.send({
+	dsEventBroker.event.send({
       element: event.target.tagName,
       name: event.target.name,
       type: event.type,
