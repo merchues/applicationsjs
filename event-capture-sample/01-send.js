@@ -52,7 +52,9 @@ function sendEvent (event) {
       value: event.target.value,
       timeStamp: event.timeStamp,
       metaData: event.metaData,
-      customData: event.customData
+      customData: event.customData,
+      correlationId: event.correlationId,
+      userAgent: event.userAgent,
     });
 }
 
@@ -60,3 +62,33 @@ dsEventBroker.capture('click');
 dsEventBroker.capture('change');
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
+
+
+/////////////////////// User agent
+root.dsEventBroker.when('*').polish(function(event){
+	event.userAgent = navigator.userAgent;
+});
+
+/////////////////////// ID generation
+
+function generateUUID(){
+	var d = new Date().getTime();
+	var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = (d + Math.random()*16)%16 | 0;// jshint ignore:line
+		d = Math.floor(d/16);
+		return (c=='x' ? r : (r&0x7|0x8)).toString(16);// jshint ignore:line
+	});
+	return uuid;
+
+}
+
+root.dsInstanceID = root.dsInstanceID || generateUUID();
+root.sessionStorage.dsSessionID = root.sessionStorage.dsSessionID || generateUUID();
+root.localStorage.dsBrowserId = root.localStorage.dsBrowserId || generateUUID();
+
+root.dsEventBroker.when('*').polish(function(event){
+	event.correlationId = {
+	  session: root.sessionStorage.dsSessionID,
+	  browser: root.localStorage.dsBrowserId
+	};
+});
