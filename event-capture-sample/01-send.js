@@ -1,5 +1,30 @@
-function getElementText (element) {
-}
+jQuery.fn.extend({
+    getPath: function () {
+        var path, node = this;
+        while (node.length) {
+            var realNode = node[0], name = realNode.localName;
+            if (!name) break;
+            name = name.toLowerCase();
+
+            var parent = node.parent();
+
+            var sameTagSiblings = parent.children(name);
+            if (sameTagSiblings.length > 1) {
+                allSiblings = parent.children();
+                var index = allSiblings.index(realNode) + 1;
+                if (index > 1) {
+                    name += ':nth-child(' + index + ')';
+                }
+            }
+
+            path = name + (path ? '>' + path : '');
+            node = parent;
+        }
+
+        return path;
+    }
+});
+
 
 function getElementDescription (element, event) {
 	if(!element) return '';
@@ -22,7 +47,7 @@ function getElementDescription (element, event) {
 
 function sendEvent (event) {
 	dsEventBroker.event.send({
-      element: event.target.tagName,
+      element: $(event.target).getPath(),
       name: getElementDescription(event.target, event),
       type: event.type,
       value: event.target.value,
