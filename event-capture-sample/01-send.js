@@ -21,10 +21,9 @@ jQuery.fn.extend({
             node = parent;
         }
 
-        return path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace('html>body>','');
+        return path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'');
     }
 });
-
 
 function getElementDescription (element, event) {
 	if(!element) return '';
@@ -56,7 +55,6 @@ function sendEvent (event) {
       customData: event.customData
     });
 }
-
 
 dsEventBroker.capture('click');
 dsEventBroker.capture('change');
