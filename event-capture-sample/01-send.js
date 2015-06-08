@@ -65,7 +65,7 @@ dsEventBroker.when('change').then(sendEvent);
 
 
 /////////////////////// User agent
-root.dsEventBroker.when('*').polish(function(event){
+dsEventBroker.when('*').polish(function(event){
 	event.userAgent = navigator.userAgent;
 });
 
@@ -82,13 +82,13 @@ function generateUUID(){
 
 }
 
-root.dsInstanceID = root.dsInstanceID || generateUUID();
-root.sessionStorage.dsSessionID = root.sessionStorage.dsSessionID || generateUUID();
-root.localStorage.dsBrowserId = root.localStorage.dsBrowserId || generateUUID();
+dsInstanceID = dsInstanceID || generateUUID();
+sessionStorage.dsSessionID = sessionStorage.dsSessionID || generateUUID();
+localStorage.dsBrowserId = localStorage.dsBrowserId || generateUUID();
 
-root.dsEventBroker.when('*').polish(function(event){
+dsEventBroker.when('*').polish(function(event){
 	event.correlationId = {
-	  session: root.sessionStorage.dsSessionID,
-	  browser: root.localStorage.dsBrowserId
+	  session: sessionStorage.dsSessionID,
+	  browser: localStorage.dsBrowserId
 	};
 });
