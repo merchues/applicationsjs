@@ -1,7 +1,20 @@
-function sendClickEvent (event) {
-	dsEventBroker.event.send({
+function getElementDescription (element) {
+
+	if (element.tagName === 'A') {
+		return element.title ? element.title : $(element).text();
+	}
+	else if (element.tagName === 'BUTTON') {
+		return $(element).text();
+	}
+	else if (element.tagName === 'INPUT') {
+		return element.name;
+	}
+}
+
+function sendEvent (event) {
+	dsEventBroker.analytics.send({
       element: event.target.tagName,
-      name: event.target.name,
+      name: getElementDescription(event.target),
       type: event.type,
       value: event.target.value,
       timeStamp: event.timeStamp,
@@ -12,4 +25,6 @@ function sendClickEvent (event) {
 
 
 dsEventBroker.capture('click');
-dsEventBroker.when('click').then(sendClickEvent);
+dsEventBroker.capture('change');
+dsEventBroker.when('click').then(sendEvent);
+dsEventBroker.when('change').then(sendEvent);
