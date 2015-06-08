@@ -9,7 +9,7 @@ function getElementDescription (element, event) {
 	else if (element.tagName === 'BUTTON') {
 		return $(element).text();
 	}
-	else if (element.tagName === 'INPUT') {
+	else if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
 		return element.name;
 	}
 	else if (element.tagName === 'IMG') {
