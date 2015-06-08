@@ -82,13 +82,13 @@ function generateUUID(){
 
 }
 
-dsInstanceID = dsInstanceID || generateUUID();
-sessionStorage.dsSessionID = sessionStorage.dsSessionID || generateUUID();
-localStorage.dsBrowserId = localStorage.dsBrowserId || generateUUID();
+window.dsInstanceID = window.dsInstanceID || generateUUID();
+window.sessionStorage.dsSessionID = window.sessionStorage.dsSessionID || generateUUID();
+window.localStorage.dsBrowserId = window.localStorage.dsBrowserId || generateUUID();
 
 dsEventBroker.when('*').polish(function(event){
 	event.correlationId = {
-	  session: sessionStorage.dsSessionID,
-	  browser: localStorage.dsBrowserId
+	  session: window.sessionStorage.dsSessionID,
+	  browser: window.localStorage.dsBrowserId
 	};
 });
