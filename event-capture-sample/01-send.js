@@ -12,7 +12,7 @@ function getElementDescription (element) {
 }
 
 function sendEvent (event) {
-	dsEventBroker.analytics.send({
+	dsEventBroker.event.send({
       element: event.target.tagName,
       name: getElementDescription(event.target),
       type: event.type,
