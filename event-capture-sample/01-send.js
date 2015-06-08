@@ -16,7 +16,7 @@ function getElementDescription (element, event) {
 		return element.alt;
 	}
 	else if(event && event.type === 'click') {
-		return getElementDescription($(element).parent('a, button'));
+		return getElementDescription($(element).parent('a, button')[0]);
 	}
 }
 
