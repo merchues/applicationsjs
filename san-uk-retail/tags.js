@@ -55,7 +55,7 @@ function sendEvent (event) {
       customData: event.customData,
       correlationId: event.correlationId,
       userAgent: event.userAgent,
-      url: url
+      url: event.url
     });
 }
 
