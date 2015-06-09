@@ -63,10 +63,10 @@ dsEventBroker.capture('change');
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
 
-
-/////////////////////// User agent
-dsEventBroker.when('*').polish(function(event){
-	event.userAgent = navigator.userAgent;
+/////////////////////// User agent & location
+dsEventBroker.when('*').polish({
+	userAgent: navigator.userAgent,
+	url: window.location.href
 });
 
 /////////////////////// ID generation
