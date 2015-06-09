@@ -87,9 +87,9 @@ window.dsInstanceID = window.dsInstanceID || generateUUID();
 window.sessionStorage.dsSessionID = window.sessionStorage.dsSessionID || generateUUID();
 window.localStorage.dsBrowserId = window.localStorage.dsBrowserId || generateUUID();
 
-dsEventBroker.when('*').polish(function(event){
-	event.correlationId = {
+dsEventBroker.when('*').polish({
+	correlationId: {
 	  session: window.sessionStorage.dsSessionID,
 	  browser: window.localStorage.dsBrowserId
-	};
+	}
 });
