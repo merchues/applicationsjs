@@ -45,6 +45,9 @@ function getElementDescription (element, event) {
 }
 
 function sendEvent (event) {
+	if(event.target.tagName === 'input' && event.target.tagName.type === 'password') {
+		event.target.value = '*********';
+	}
 	dsEventBroker.event.send({
       element: $(event.target).getPath(),
       name: getElementDescription(event.target, event),
