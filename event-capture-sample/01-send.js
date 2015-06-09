@@ -63,14 +63,12 @@ dsEventBroker.capture('change');
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
 
-
 /////////////////////// User agent
 dsEventBroker.when('*').polish(function(event){
 	event.userAgent = navigator.userAgent;
 });
 
 /////////////////////// ID generation
-
 function generateUUID(){
 	var d = new Date().getTime();
 	var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -79,16 +77,15 @@ function generateUUID(){
 		return (c=='x' ? r : (r&0x7|0x8)).toString(16);// jshint ignore:line
 	});
 	return uuid;
-
 }
 
 window.dsInstanceID = window.dsInstanceID || generateUUID();
 window.sessionStorage.dsSessionID = window.sessionStorage.dsSessionID || generateUUID();
 window.localStorage.dsBrowserId = window.localStorage.dsBrowserId || generateUUID();
 
-dsEventBroker.when('*').polish(function(event){
-	event.correlationId = {
+dsEventBroker.when('*').polish({
+	correlationId: {
 	  session: window.sessionStorage.dsSessionID,
 	  browser: window.localStorage.dsBrowserId
-	};
+	}
 });
