@@ -45,14 +45,15 @@ function getElementDescription (element, event) {
 }
 
 function sendEvent (event) {
+	var value = event.target.value;
 	if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
-		event.target.value = '*********';
+		value = '*********';
 	}
 	dsEventBroker.event.send({
       element: $(event.target).getPath(),
       name: getElementDescription(event.target, event),
       type: event.type,
-      value: event.target.value,
+      value: value,
       timeStamp: event.timeStamp,
       metaData: event.metaData,
       customData: event.customData,
