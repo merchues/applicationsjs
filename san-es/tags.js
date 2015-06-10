@@ -21,7 +21,7 @@ jQuery.fn.extend({
             node = parent;
         }
 
-        return path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'');
+        return path ? path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'') : '?';
     }
 });
 
