@@ -21,7 +21,7 @@ jQuery.fn.extend({
             node = parent;
         }
 
-        return path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'');
+        return path ? path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'') : '?';
     }
 });
 
@@ -54,7 +54,7 @@ function sendEvent (event) {
       name: getElementDescription(event.target, event),
       type: event.type,
       value: value,
-      timeStamp: event.timeStamp,
+      timeStamp: event.timeStamp || new Date().getTime(),
       metaData: event.metaData,
       customData: event.customData,
       correlationId: event.correlationId,

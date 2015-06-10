@@ -54,7 +54,7 @@ function sendEvent (event) {
       name: getElementDescription(event.target, event),
       type: event.type,
       value: value,
-      timeStamp: event.timeStamp,
+      timeStamp: event.timeStamp || new Date().getTime(),
       metaData: event.metaData,
       customData: event.customData,
       correlationId: event.correlationId,
