@@ -20,7 +20,7 @@ jQuery.fn.extend({
             path = name + (path ? '>' + path : '');
             node = parent;
         }
-
+        alert('test');
         return path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'');
     }
 });
