@@ -20,9 +20,7 @@ jQuery.fn.extend({
             path = name + (path ? '>' + path : '');
             node = parent;
         }
-        
-        alert('test');
-        return path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'');
+        return path ? path.replace(/(?:div|span)\>/g,' ').replace(/\>\s+/g,' ').replace(/^html\>body\>?/,'') : '?';
     }
 });
 
@@ -46,16 +44,21 @@ function getElementDescription (element, event) {
 }
 
 function sendEvent (event) {
+	var value = event.target.value;
+	if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
+		value = '*********';
+	}
 	dsEventBroker.event.send({
       element: $(event.target).getPath(),
       name: getElementDescription(event.target, event),
       type: event.type,
-      value: event.target.value,
-      timeStamp: event.timeStamp,
+      value: value,
+      timeStamp: event.timeStamp || new Date().getTime(),
       metaData: event.metaData,
       customData: event.customData,
       correlationId: event.correlationId,
       userAgent: event.userAgent,
+      url: event.url
     });
 }
 
@@ -64,12 +67,14 @@ dsEventBroker.capture('change');
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
 
-/////////////////////// User agent
-dsEventBroker.when('*').polish(function(event){
-	event.userAgent = navigator.userAgent;
+/////////////////////// User agent & location
+dsEventBroker.when('*').polish({
+	userAgent: navigator.userAgent,
+	url: window.location.href
 });
 
 /////////////////////// ID generation
+
 function generateUUID(){
 	var d = new Date().getTime();
 	var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -78,6 +83,7 @@ function generateUUID(){
 		return (c=='x' ? r : (r&0x7|0x8)).toString(16);// jshint ignore:line
 	});
 	return uuid;
+
 }
 
 window.dsInstanceID = window.dsInstanceID || generateUUID();
