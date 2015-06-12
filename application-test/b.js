@@ -1,2 +1,2 @@
 alert('b file');
-alert('c file');
+alert('s file');
