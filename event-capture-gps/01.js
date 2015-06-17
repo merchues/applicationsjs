@@ -47,7 +47,7 @@ function sendEvent (event) {
   var value = undefined;
 
   if(event.target) {
-    event.target.value;
+    value = event.target.value;
     if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
       value = '*********';
     }
