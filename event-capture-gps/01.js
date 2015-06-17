@@ -80,7 +80,7 @@ dsEventBroker.when('*').polish({
 
 window.addEventListener('orientationchange', function() {
   // Announce the new orientation number
-  window.dsEventBroker.trigger('orientationChange', {metaData:{orientation: screen.orientation}});
+  window.dsEventBroker.trigger('orientationchange', {metaData:{orientation: screen.orientation}});
 }, false);
 
 /////////////////////// Geolocate events
