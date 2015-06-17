@@ -64,7 +64,7 @@ function sendEvent (event) {
 
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
-dsEventBroker.when('orientationchange').then(orientationchange);
+dsEventBroker.when('orientationchange').then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
