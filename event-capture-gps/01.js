@@ -44,9 +44,13 @@ function getElementDescription (element, event) {
 }
 
 function sendEvent (event) {
-  var value = event.target.value;
-  if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
-    value = '*********';
+  var value = undefined;
+
+  if(event.target) {
+    event.target.value;
+    if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
+      value = '*********';
+    }
   }
   dsEventBroker.event.send({
       element: $(event.target).getPath(),
