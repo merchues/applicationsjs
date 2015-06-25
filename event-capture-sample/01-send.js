@@ -1,11 +1,11 @@
 dsEventBroker.event = {
-                URL: '//santander-eventmanager.cf.lvtc.gsnet.corp/event-capture-sample/ds-el',
+                URL: 'http://santander-eventmanager.cf.lvtc.gsnet.corp/event-capture-sample/ds-el',
                 send: function(data) {
                     console.log('sending');
                         window.$.ajax({
                             type: 'POST',
                             url: this.URL,
-                            async: false,
+                            //async: false,
                             timeout: 250,
                             data: JSON.stringify(data),
                             dataType: 'json',
