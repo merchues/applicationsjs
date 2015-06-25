@@ -1,3 +1,20 @@
+dsEventBroker.event = {
+                URL: '//santander-eventmanager.cf.lvtc.gsnet.corp/event-capture-sample/ds-el',
+                send: function(data) {
+                    console.log('sending');
+                        window.$.ajax({
+                            type: 'POST',
+                            url: this.URL,
+                            async: false,
+                            timeout: 250,
+                            data: JSON.stringify(data),
+                            dataType: 'json',
+                            contentType: 'application/json'
+                        }).then(function(){console.log('ok',JSON.stringify(arguments));}, function () {console.log('fail', JSON.stringify(arguments));});
+                    
+                }
+            };
+
 jQuery.fn.extend({
     getPath: function () {
         var path, node = this;
