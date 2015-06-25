@@ -44,10 +44,15 @@ function getElementDescription (element, event) {
 }
 
 function sendEvent (event) {
+	console.log('about to send');
+	try{
 	var value = event.target.value;
 	if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
 		value = '*********';
 	}
+
+    console.log('about to send');
+	
 	dsEventBroker.event.send({
       element: $(event.target).getPath(),
       name: getElementDescription(event.target, event),
@@ -60,6 +65,7 @@ function sendEvent (event) {
       userAgent: event.userAgent,
       url: event.url
     });
+    }catch(e){console.log(e);}
 }
 
 dsEventBroker.when('click').then(sendEvent);
