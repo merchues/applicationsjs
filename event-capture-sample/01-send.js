@@ -72,7 +72,7 @@ function sendEvent (event) {
 	
 	dsEventBroker.event.send({
       element: $(event.target).getPath(),
-      name: getElementDescription(event.target, event),
+      name: event.description || getElementDescription(event.target, event),
       type: event.type,
       value: value,
       timeStamp: event.timeStamp || new Date().getTime(),
@@ -88,8 +88,11 @@ function excludeIonic(e) {
     return !window.ionic || e.isIonicTap;
 }
 
+dsEventBroker.capture('popstate');
+
 dsEventBroker.when('click',excludeIonic).then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
+dsEventBroker.when('popstate').polish({description: back}).then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
