@@ -92,7 +92,6 @@ dsEventBroker.capture('popstate', window);
 
 dsEventBroker.when('click',excludeIonic).then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
-dsEventBroker.when('hashchange').polish({description: 'view changed'}).then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
