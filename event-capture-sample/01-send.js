@@ -88,7 +88,7 @@ function excludeIonic(e) {
     return !window.ionic || e.isIonicTap;
 }
 
-dsEventBroker.capture('popstate');
+dsEventBroker.capture('popstate', window);
 
 dsEventBroker.when('click',excludeIonic).then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
