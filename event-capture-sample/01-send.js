@@ -1,20 +1,3 @@
-dsEventBroker.event = {
-                URL: 'http://santander-eventmanager.cf.lvtc.gsnet.corp/event-capture-sample/ds-el',
-                send: function(data) {
-                    console.log('sending');
-                        window.$.ajax({
-                            type: 'POST',
-                            url: this.URL,
-                            //async: false,
-                            timeout: 250,
-                            data: JSON.stringify(data),
-                            dataType: 'json',
-                            contentType: 'application/json'
-                        }).then(function(){console.log('ok',JSON.stringify(arguments));}, function () {console.log('fail', JSON.stringify(arguments));});
-                    
-                }
-            };
-
 jQuery.fn.extend({
     getPath: function () {
         var path, node = this;
@@ -61,14 +44,10 @@ function getElementDescription (element, event) {
 }
 
 function sendEvent (event) {
-	console.log('about to send');
-	try{
 	var value = event.target.value;
 	if(event.target.tagName === 'INPUT' && event.target.type === 'password') {
 		value = '*********';
 	}
-
-    console.log('about to send');
 	
 	dsEventBroker.event.send({
       element: $(event.target).getPath(),
@@ -82,15 +61,12 @@ function sendEvent (event) {
       userAgent: event.userAgent,
       url: event.url
     });
-    }catch(e){console.log(e);}
 }
-function excludeIonic(e) { 
+/*function excludeIonic(e) { 
     return !window.ionic || e.isIonicTap;
-}
+}*/
 
-dsEventBroker.capture('popstate', window);
-
-dsEventBroker.when('click',excludeIonic).then(sendEvent);
+dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
 
 /////////////////////// User agent & location
