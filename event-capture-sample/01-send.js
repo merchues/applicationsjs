@@ -86,8 +86,8 @@ function sendEvent (event) {
 }
 function excludeIonic(e) { return !e.isIonicTap;}
 
-dsEventBroker.when('click').filter(excludeIonic).then(sendEvent);
-dsEventBroker.when('change').filter(excludeIonic).then(sendEvent);
+dsEventBroker.when('click').when(excludeIonic).then(sendEvent);
+dsEventBroker.when('change').when(excludeIonic).then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
