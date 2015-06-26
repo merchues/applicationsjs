@@ -62,9 +62,6 @@ function sendEvent (event) {
       url: event.url
     });
 }
-/*function excludeIonic(e) { 
-    return !window.ionic || e.isIonicTap;
-}*/
 
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
