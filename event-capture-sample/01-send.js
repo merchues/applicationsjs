@@ -92,7 +92,7 @@ dsEventBroker.capture('popstate');
 
 dsEventBroker.when('click',excludeIonic).then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
-dsEventBroker.when('popstate').polish({description: back}).then(sendEvent);
+dsEventBroker.when('popstate').polish({description: 'back'}).then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
