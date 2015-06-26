@@ -85,7 +85,7 @@ function sendEvent (event) {
     }catch(e){console.log(e);}
 }
 function excludeIonic(e) { 
-    return !e.isIonicTap;
+    return !window.ionic || e.isIonicTap;
 }
 
 dsEventBroker.when('click',excludeIonic).then(sendEvent);
