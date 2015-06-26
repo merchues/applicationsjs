@@ -89,7 +89,7 @@ function excludeIonic(e) {
 }
 
 dsEventBroker.when('click',excludeIonic).then(sendEvent);
-dsEventBroker.when('change',excludeIonic).then(sendEvent);
+dsEventBroker.when('change').then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
