@@ -84,9 +84,10 @@ function sendEvent (event) {
     });
     }catch(e){console.log(e);}
 }
+function excludeIonic(e) { return !e.isIonicTap;}
 
-dsEventBroker.when('click').then(sendEvent);
-dsEventBroker.when('change').then(sendEvent);
+dsEventBroker.when('click').filter(excludeIonic).then(sendEvent);
+dsEventBroker.when('change').filter(excludeIonic).then(sendEvent);
 
 /////////////////////// User agent & location
 dsEventBroker.when('*').polish({
