@@ -84,7 +84,9 @@ function sendEvent (event) {
     });
     }catch(e){console.log(e);}
 }
-function excludeIonic(e) { return !e.isIonicTap;}
+function excludeIonic(e) { 
+    return !e.isIonicTap;
+}
 
 dsEventBroker.when('click').when(excludeIonic).then(sendEvent);
 dsEventBroker.when('change').when(excludeIonic).then(sendEvent);
