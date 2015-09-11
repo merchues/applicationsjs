@@ -49,7 +49,7 @@ function sendEvent (event) {
 		value = '*********';
 	}
 	
-	dsEventBroker.event.send({
+	var promise = dsEventBroker.event.send({
       element: $(event.target).getPath(),
       name: event.description || getElementDescription(event.target, event),
       type: event.type,
@@ -61,6 +61,7 @@ function sendEvent (event) {
       userAgent: event.userAgent,
       url: event.url
     });
+    event.blockUntilPromise(promise);
 }
 
 dsEventBroker.when('click').then(sendEvent);
