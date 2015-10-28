@@ -1,6 +1,8 @@
 dsEventBroker.when('*').polish(function () {
     return {
-        title: document.title
+        customData: {
+            title: document.title
+        }
     }
 });
 
