@@ -1,4 +1,4 @@
-dsEventBroker.when('*', function () {
+dsEventBroker.when('*').then(function () {
     return {
         title: document.title
     }
