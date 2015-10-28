@@ -1,19 +1,15 @@
-dsEventBroker.when('*').polish(function () {
-    return {
-        customData: {
-            title: document.title
-        }
-    }
-});
-
+//EVENTOS A CAPTURAR
 dsEventBroker.when('click').then(sendEvent);
 dsEventBroker.when('change').then(sendEvent);
 
-dsEventBroker.when('click','form>div:nth-child(7)>button:nth-child(2),form>div:nth-child(7)>button:nth-child(2) *').polish(function() {
-                return {
-                    customData: {
-                        'account':$('label>p').text()
-                    }
-                };
-            }).then(sendEvent);
+//ENRIQUECIMIENTO
+dsEventBroker.when('*').polish(function () {
+    return {
+        customData: {
+            title: document.title,
+            clientId: utag_data.cod_cliente,
+            uid: utag_data.uid
+        }
+    }
+});
 
